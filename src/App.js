@@ -1,26 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { Jobs } from './component/Jobs'
+import { Editor } from './component/Editor'
+import { DataProvider} from './dataContext/DataProvider'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  return( 
+    <DataProvider>
+      <Router>
+        <Switch>
+          <Route path="/jobs" exact={true} component={Jobs} />
+          <Route path="/edit/:id" exact={true} component={Editor} />
+          <Redirect to="/jobs" />
+        </Switch>
+      </Router>
+    </DataProvider>
+  )
 }
 
 export default App;
